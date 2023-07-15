@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { signUp } from "../context/AuthContext";
