@@ -1,26 +1,25 @@
-import { Box, Button } from '@mui/material'
-import React from 'react'
-import { useState } from 'react'
-import TextField from '@mui/material/TextField'
-import Modal from '@mui/material/Modal'
+import { Box, Button } from "@mui/material";
+import { useState } from "react";
+import TextField from "@mui/material/TextField";
 import { signInWithEmail } from "../context/AuthContext";
 
 const Login = () => {
-const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const openModal = () => setOpen(true);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-    signInWithEmail(email,password)
-    setOpen(false)
-  }
+    e.preventDefault();
+    signInWithEmail(email, password);
+    setOpen(false);
+  };
   return (
     <Box>
-        <Button onClick={openModal}>Login</Button>
-        {open ? <form onSubmit={handleSubmit}>
+      <Button onClick={openModal}>Login</Button>
+      {open ? (
+        <form onSubmit={handleSubmit}>
           <TextField
             label="Email"
             value={email}
@@ -35,10 +34,12 @@ const [open, setOpen] = useState(false);
           />
 
           <Button type="submit">Sign In</Button>
-        </form> : <></>}
+        </form>
+      ) : (
+        <></>
+      )}
     </Box>
-        
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

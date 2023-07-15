@@ -7,27 +7,26 @@ import Login from "./Login";
 import Logout from "./Logout";
 import { Box, Typography } from "@mui/material";
 const Navbar = () => {
-    const { user} = React.useContext(AuthContext);
-    console.log(user)
-    useEffect(() => {
-        console.log(user)
-    }, [user])
+  const { user } = React.useContext(AuthContext);
+  console.log(user);
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <nav>
       {user ? (
         // <button onClick={() => logout()}>Logout</button>
         <Box>
           <Typography>Logged in</Typography>
-          <Logout/>
+          <Logout />
         </Box>
-        
       ) : (
         <div>
           {/* <button onClick={() => openLogin()}>Login</button>
           <button onClick={() => openRegister()}>Register</button> */}
           <div>logged out</div>
-          <Register/>
-          <Login/>
+          <Register />
+          <Login />
         </div>
       )}
     </nav>

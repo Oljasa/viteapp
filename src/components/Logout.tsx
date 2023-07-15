@@ -1,13 +1,10 @@
-import { Button } from '@mui/material'
-import React from 'react'
-import { signOut } from '../context/AuthContext'
+import { Button } from "@mui/material";
+import { signOut } from "../context/AuthContext";
 const Logout = () => {
-    const handleSignOut = () => {
-        signOut()
-    }
-  return (
-    <Button onClick={handleSignOut}>Logout</Button>
-  )
-}
+  const handleSignOut = () => {
+    signOut();
+  };
+  return <Button onClick={handleSignOut}>Logout</Button>;
+};
 
-export default Logout
+export default Logout;
