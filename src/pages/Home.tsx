@@ -1,6 +1,44 @@
 import Navbar from "../components/Navbar";
-import { Grid } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { AuthContext, getAllPosts, getUser, makeAPost } from "../context/AuthContext";
+import React, { useEffect, useState } from "react";
+import Posts from "./Posts";
+
+interface Post {
+  id: number;
+  user_id: string;
+  content: string;
+  created_at: string;
+  username:string
+}
 const Home = () => {
+  const { user } = React.useContext(AuthContext);
+  const [post, setPost] = useState("");
+  const [posts,setPosts] = useState([])
+  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
+  // console.log(user.user)
+  // const username = await getUser(user?.user.id)
+  useEffect(() => {
+    //   console.log(user.user);
+    //   const userHasName = getUser(user?.user.id);
+    //   if(await userHasName){
+    //     setShowUserSelect(false)
+    //   }
+    //   console.log(userHasName);
+    const fetchUserName = async () => {
+      console.log('NEWUSERID',user?.user.id)
+      const userHasName = await getUser(user?.user.id);
+      console.log(userHasName[0].username);
+      setUsername(userHasName[0].username)
+    }
+    fetchUserName()
+    }, [user])
+    const handleSubmit = async () => {
+      const newPost = await makeAPost(post, user?.user.id, username)
+      const newPosts: Post[] = await getAllPosts() as Post[]
+            setPosts(newPosts)
+    }
   return (
     // <div>
     //   <Navbar/>
@@ -15,7 +53,32 @@ const Home = () => {
         <Navbar />
       </Grid>
       <Grid item xs={9}>
-        <div>Posts</div>
+        {user ? 
+          <Box>
+            <Typography>Welcome {username}</Typography>
+             {/* <TextField
+            label="Post"
+            type="post"
+            value={post}
+            onChange={(e) => sendPost(e.target.value)}
+          /> */}
+          <Box component="form">
+            <TextField 
+                multiline
+                label="Write your post"
+                value={post}
+                onChange={e => setPost(e.target.value)}  
+            />
+            <Button 
+        variant="contained"
+        onClick={handleSubmit}
+      >
+        Submit Post
+      </Button>
+
+          </Box>
+          </Box> : <></>}
+          <Posts posts={posts} setPosts={setPosts}/>
       </Grid>
     </Grid>
     // <Box sx={{ display: "flex", justifyContent: "space-around", bgcolor:'background.paper' }}>

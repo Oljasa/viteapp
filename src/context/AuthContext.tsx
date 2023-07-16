@@ -3,7 +3,15 @@
 import { createContext, useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
-export const AuthContext = createContext({
+interface User {
+  user: object
+  id: string
+}
+
+interface AuthContextValue {
+  user: User | null
+}
+export const AuthContext = createContext<AuthContextValue>({
     user: null,
 })
 interface AuthProviderProps {
@@ -53,6 +61,48 @@ interface AuthProviderProps {
     } 
     return false
   }
+  export async function registerName(username: any, userID:any) {
+    console.log(userID)
+    const { data, error } = await supabase
+      .from('profiles')
+      .insert([{ username, id: userID }])
+    if (error) {
+      console.log(error)
+    }
+    console.log(data)
+  }
+  export async function getUser(userID: string) {
+    userID.trim()
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('username')
+      .eq('id', userID)
+    if (error) {
+      console.log(error)
+    }
+    console.log(data)
+    return data
+  }
+  export async function getAllPosts(){
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+    if (error) {
+      console.log(error)
+    }
+    console.log(data)
+    return data
+  }
+  export async function makeAPost(content: string, userID: string, username: string){
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([{ content, user_id: userID, username }])
+    if (error) {
+      console.log(error)
+    }
+    console.log(data)
+    return data
+  }
   
 export const AuthProvider = ({ children }:AuthProviderProps) => {
   const [user, setUser] = useState<any|null>()
@@ -73,10 +123,11 @@ console.log('current user', user)
   }, [])
 
   // Rest of context provider
-console.log(children)
   return (
     <AuthContext.Provider value={{ user }}>
       {children} 
     </AuthContext.Provider>
   )
 }
+
+export type {User}
