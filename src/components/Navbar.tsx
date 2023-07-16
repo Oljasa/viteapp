@@ -9,13 +9,13 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { validateUserName } from "../context/AuthContext";
 import { registerName } from "../context/AuthContext";
 import { getUser } from "../context/AuthContext";
-
+import {User} from '../context/AuthContext'
 const { useState } = React;
 const Navbar = () => {
   const [username, setUsername] = useState("");
   const [exists, setExists] = useState(false);
   const [showUserSelect, setShowUserSelect] = useState(true);
-  const { user } = React.useContext(AuthContext);
+  const { user } = React.useContext(AuthContext) as User;
 
   console.log(user);
   useEffect(() => {
@@ -50,7 +50,7 @@ const Navbar = () => {
   //   console.log(userHasName);
   const fetchUserName = async () => {
     console.log('NEWUSERID',user?.user.id)
-    const userHasName = await getUser(user?.user.id);
+    const userHasName:any = await getUser(user?.user.id);
     console.log(userHasName);
     if(userHasName.length>=1){
       setShowUserSelect(false)

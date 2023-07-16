@@ -8,7 +8,11 @@ interface Post {
     created_at: string;
     username:string
 }
-const Posts = ({posts,setPosts}) => {
+interface Props {
+    posts: Post[],
+    setPosts: (posts: Post[]) => void  
+}
+const Posts = ({posts,setPosts}:Props) => {
     // const [posts,setPosts] = useState<Post[]>([])
     useEffect(() => {
         const fetchPosts = async () => {

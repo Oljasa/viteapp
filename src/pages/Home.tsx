@@ -14,7 +14,7 @@ interface Post {
 const Home = () => {
   const { user } = React.useContext(AuthContext);
   const [post, setPost] = useState("");
-  const [posts,setPosts] = useState([])
+  const [posts,setPosts] = useState<Post[]>([])
   const [username, setUsername] = useState("");
   // const [username, setUsername] = useState("");
   // console.log(user.user)
@@ -28,7 +28,7 @@ const Home = () => {
     //   console.log(userHasName);
     const fetchUserName = async () => {
       console.log('NEWUSERID',user?.user.id)
-      const userHasName = await getUser(user?.user.id);
+      const userHasName:any = await getUser(user?.user.id);
       console.log(userHasName[0].username);
       setUsername(userHasName[0].username)
     }
@@ -36,7 +36,7 @@ const Home = () => {
     }, [user])
     const handleSubmit = async () => {
       const newPost = await makeAPost(post, user?.user.id, username)
-      const newPosts: Post[] = await getAllPosts() as Post[]
+      const newPosts: Post[] | any = await getAllPosts() as Post[]
             setPosts(newPosts)
     }
   return (

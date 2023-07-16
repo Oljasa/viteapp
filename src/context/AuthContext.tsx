@@ -4,7 +4,7 @@ import { createContext, useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
 interface User {
-  user: object
+  user: any
   id: string
 }
 
