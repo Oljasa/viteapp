@@ -35,7 +35,7 @@ const Home = () => {
     fetchUserName()
     }, [user])
     const handleSubmit = async () => {
-      const newPost = await makeAPost(post, user?.user.id, username)
+      await makeAPost(post, user?.user.id, username)
       const newPosts: Post[] | any = await getAllPosts() as Post[]
             setPosts(newPosts)
     }

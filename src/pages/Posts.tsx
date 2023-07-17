@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { getAllPosts } from '../context/AuthContext'
 import { Box, Card, CardContent, Typography } from '@mui/material';
 interface Post {

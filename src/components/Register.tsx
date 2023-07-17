@@ -6,7 +6,6 @@ const Register = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [exists, setExists] = useState(false);
   const openModal = () => setOpen(!open);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -37,7 +36,6 @@ const Register = () => {
           />
          
           <Button type="submit">Sign Up</Button>
-          {exists ? <Typography>Username is taken</Typography> : <></>}
         </form>
       ) : (
         <></>
