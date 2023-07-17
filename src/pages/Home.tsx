@@ -29,8 +29,11 @@ const Home = () => {
     const fetchUserName = async () => {
       console.log('NEWUSERID',user?.user.id)
       const userHasName:any = await getUser(user?.user.id);
-      console.log(userHasName[0].username);
-      setUsername(userHasName[0].username)
+      // console.log(userHasName[0].username);
+      if(userHasName.length>=1){
+        console.log(userHasName[0].username)
+        setUsername(userHasName[0].username)
+      }
     }
     fetchUserName()
     }, [user])
